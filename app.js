@@ -6,7 +6,7 @@ import cors from 'cors';
 import errorHandler from './middlewares/errorHandler.js'; 
 import logger from "./middlewares/logger.js";
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_DB_URL = "mongodb://localhost:27017/aroundb" } = process.env;
 
 const app = express();
 app.use(express.json());
@@ -14,7 +14,7 @@ app.use(cors({
   origin: "*"
 }));
 
-mongoose.connect('mongodb://localhost:27017/aroundb');
+mongoose.connect(MONGO_DB_URL);
 
 app.use(logger.requestLogger);
 
